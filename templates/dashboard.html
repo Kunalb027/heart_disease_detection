@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Heart Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">Heart Disease Detection</div>
+            <div class="nav-links">
+                <span>Welcome, {{ user_name }}!</span>
+                <a href="{{ url_for('predict') }}">New Prediction</a>
+                <a href="{{ url_for('history') }}">View History</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <h2>Welcome to Your Health Dashboard</h2>
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <h3>Quick Prediction</h3>
+                    <p>Check your heart disease risk instantly</p>
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary">Start Prediction</a>
+                </div>
+                <div class="dashboard-card">
+                    <h3>View History</h3>
+                    <p>Check your previous predictions</p>
+                    <a href="{{ url_for('history') }}" class="btn btn-secondary">View Records</a>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Download Report</h3>
+                    <p>Get detailed PDF report of your health data</p>
+                    <a href="{{ url_for('download_report') }}" class="btn btn-info">Download Report</a>
+                </div>
+                <div class="dashboard-card">
+                    <h3>📊 Model Accuracy</h3>
+                    <p>Check how accurate our Neuro‑Fuzzy model is on real dataset</p>
+                    <a href="{{ url_for('show_accuracy') }}" class="btn btn-info">View Accuracy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

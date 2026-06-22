@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">Heart Disease Detection</div>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('predict') }}">New Prediction</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="history-container">
+            <h2>Your Prediction History</h2>
+
+            {% if predictions %}
+                <div class="table-responsive">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Age</th>
+                                <th>BP</th>
+                                <th>Cholesterol</th>
+                                <th>Heart Rate</th>
+                                <th>Risk %</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pred in predictions %}
+                            <tr>
+                                <td>{{ pred.prediction_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>{{ pred.age }}</td>
+                                <td>{{ pred.trestbps }}</td>
+                                <td>{{ pred.chol }}</td>
+                                <td>{{ pred.thalach }}</td>
+                                <td class="{% if pred.risk_percentage > 50 %}high-risk{% else %}low-risk{% endif %}">
+                                    {{ pred.risk_percentage }}%
+                                </td>
+                                <td>
+                                    <span class="badge {% if pred.prediction_result == 'High Risk' %}badge-danger{% else %}badge-success{% endif %}">
+                                        {{ pred.prediction_result }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="download-section">
+                    <a href="{{ url_for('download_report') }}" class="btn btn-info">📄 Download Complete Report (PDF)</a>
+                </div>
+            {% else %}
+                <div class="no-data">
+                    <p>No predictions found. Start your first prediction now!</p>
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary">Make First Prediction</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

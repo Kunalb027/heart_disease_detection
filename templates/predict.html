@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">Heart Disease Detection</div>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('history') }}">History</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="prediction-container">
+            <h2>Heart Disease Risk Assessment</h2>
+
+            {% if prediction %}
+                <div class="result-card">
+                    <h3>Prediction Result</h3>
+                    <div class="risk-percentage">
+                        Risk Percentage: <span class="risk-value">{{ prediction.risk_percentage }}%</span>
+                    </div>
+                    <div class="prediction-result">
+                        Result: <strong>{{ prediction.result }}</strong>
+                    </div>
+                    <div class="recommendation">
+                        {% if prediction.risk_percentage > 50 %}
+                            <p>⚠️ High Risk Detected! Please consult a doctor immediately.</p>
+                        {% else %}
+                            <p>✅ Low Risk Detected! Maintain healthy lifestyle.</p>
+                        {% endif %}
+                    </div>
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary">Make Another Prediction</a>
+                </div>
+            {% else %}
+                <form method="POST" class="prediction-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Age:</label>
+                            <input type="number" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sex (1=Male, 0=Female):</label>
+                            <select name="sex">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Chest Pain Type (0-3):</label>
+                            <input type="number" name="cp" min="0" max="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Resting BP (mm Hg):</label>
+                            <input type="number" name="trestbps" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cholesterol (mg/dl):</label>
+                            <input type="number" name="chol" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Fasting Blood Sugar > 120 (1=Yes,0=No):</label>
+                            <select name="fbs">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Resting ECG (0-2):</label>
+                            <input type="number" name="restecg" min="0" max="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Max Heart Rate:</label>
+                            <input type="number" name="thalach" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Exercise Induced Angina (1=Yes,0=No):</label>
+                            <select name="exang">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Oldpeak (ST depression):</label>
+                            <input type="number" step="0.1" name="oldpeak" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Slope (0-2):</label>
+                            <input type="number" name="slope" min="0" max="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Major Vessels (0-3):</label>
+                            <input type="number" name="ca" min="0" max="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thalassemia (0-3):</label>
+                        <input type="number" name="thal" min="0" max="3" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Predict Heart Disease Risk</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

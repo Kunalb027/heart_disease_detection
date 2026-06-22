@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Accuracy - Heart Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">Heart Disease Detection</div>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('predict') }}">New Prediction</a>
+                <a href="{{ url_for('history') }}">History</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="accuracy-container">
+            <h2>🧠 Neuro‑Fuzzy Model Performance</h2>
+
+            {% if error %}
+                <div class="error-message">
+                    <p>Error: {{ error }}</p>
+                    <p>Make sure the file <strong>heart.csv</strong> is present in the project folder.</p>
+                </div>
+            {% else %}
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">{{ metrics.accuracy }}%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">{{ metrics.precision }}%</div>
+                        <div class="metric-label">Precision</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">{{ metrics.recall }}%</div>
+                        <div class="metric-label">Recall</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">{{ metrics.f1_score }}%</div>
+                        <div class="metric-label">F1 Score</div>
+                    </div>
+                </div>
+                <div class="info-text">
+                    <p>✅ Evaluated on <strong>{{ metrics.total_samples }}</strong> test samples (20% of dataset).</p>
+                    <p>The model converts risk percentage (>50% → High Risk) to binary prediction.</p>
+                </div>
+            {% endif %}
+
+            <div class="back-button">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

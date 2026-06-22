@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>❤️ Heart Disease Detection System</h1>
+            <h2>Using Neuro-Fuzzy Approach</h2>
+            <p>Advanced AI-powered system for early heart disease detection with high accuracy</p>
+            <div class="button-group">
+                <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Neuro-Fuzzy Logic</h3>
+                <p>Combines neural networks and fuzzy logic for accurate predictions</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Risk Percentage</h3>
+                <p>Get detailed risk assessment in percentage</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Data Storage</h3>
+                <p>All predictions stored securely in MySQL database</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📄</div>
+                <h3>Report Generation</h3>
+                <p>Download detailed PDF reports of your health history</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
